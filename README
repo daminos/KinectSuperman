@@ -12,10 +12,10 @@ Release Notes:
 To run the game from the Binary, simply open "Bin\SupermanIVR.exe".
 To edit the project, run Unity3D (Free or Pro) and load the project, which is the "SupermanProject" folder. Afterwards click on the "Play" button to start the game.
 (If you see a blank screen, click on the "SupermanScene" script from the "Project" tab.)
-
+!! The game can also be run without VR glasses !!
 
 * Remember to calibrate the glasses before starting, Set zero towards the Kinect
-* Set the resolution of the executable to 1024x768 for best results.
+* Set the resolution of the executable to 1024x768 or higher for best results.
 * Start the tracking procedure with OpenNI's calibration pose, usually this works better without wearing the VR glasses (they mirror)
 
 
