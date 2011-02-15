@@ -152,13 +152,13 @@ public class NiteWrapper {
 
 // Our wrapper which receives the gyroscope information (yaw, pitch, roll) from the Vuzix iWear VR920.
 public class VRWrapper {
-	[DllImport("./Release/iWearWrapper.dll")]
+	[DllImport("./iWear/iWearWrapper.dll")]
     public static extern char WrapIWROpenTracker();
 
-    [DllImport("./Release/iWearWrapper.dll")]
+    [DllImport("./iWear/iWearWrapper.dll")]
     public static extern char WrapIWRGetTracking(ref int yaw, ref int pitch, ref int roll);
 	
-	[DllImport("./Release/iWearWrapper.dll")]
+	[DllImport("./iWear/iWearWrapper.dll")]
     public static extern void WrapIWRCloseTracker();	
 }
 
