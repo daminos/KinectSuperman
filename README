@@ -1,0 +1,32 @@
+Kinect Superman v1.0
+========================================
+Made by: Daniël Karavolos
+         Sicco van Sas
+         Maarten van der Velden
+for:     ISLA - University of Amsterdam
+         January 2011
+========================================
+
+Release Notes:
+--------------
+To use this project, run Unity3D (Free or Pro) and load the project from the
+"SupermanProject". Afterwards click on the "Play" button to start the game.
+(If you see a blank screen, click on the "SupermanScene" script from the "Project" tab.)
+
+* Start the game with OpenNI's calibration pose *
+
+Please note that the main code file is the script "SupermanProject\Assets\Superman\Nite.cs".
+The wrapper for the Vuzix glasses is also in there. This makes use of the "SupermanProject\Release\iWearWrapper.dll" file. The source of this file is in the folder "SupermanProject\iWear".
+
+Build Notes (for Win32/Win64):
+------------------------------
+
+Requirements:
+    1) Unity3D engine 3.1 (http://unity3d.com/unity/download/)
+    2) SensorKinect driver (https://github.com/avin2/SensorKinect)
+    2) OpenNI (http://www.openni.org)
+    3) NITE (http://www.primesense.com/?p=515)
+    4) For the Vuzix glasses: Vuzix VR manager 3 (http://www.vuzix.com/site/_support/Vuzix_VR_Manager_3.zip)
+    5) For stereo vision: iZ3D drivers (http://www.iz3d.com/)
+    
+    Note: If you're having trouble getting everything to work. We found this blogpost to be very useful:http://www.cleoag.ru/2010/12/10/kinect-openni/
