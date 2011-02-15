@@ -9,14 +9,21 @@ for:     ISLA - University of Amsterdam
 
 Release Notes:
 --------------
-To use this project, run Unity3D (Free or Pro) and load the project from the
-"SupermanProject". Afterwards click on the "Play" button to start the game.
+To run the game from the Binary, simply open "Bin\SupermanIVR.exe".
+To edit the project, run Unity3D (Free or Pro) and load the project, which is the "SupermanProject" folder. Afterwards click on the "Play" button to start the game.
 (If you see a blank screen, click on the "SupermanScene" script from the "Project" tab.)
 
-* Start the game with OpenNI's calibration pose *
+
+* Remember to calibrate the glasses before starting, Set zero towards the Kinect
+* Set the resolution of the executable to 1024x768 for best results.
+* Start the tracking procedure with OpenNI's calibration pose, usually this works better without wearing the VR glasses (they mirror)
+
 
 Please note that the main code file is the script "SupermanProject\Assets\Superman\Nite.cs".
 The wrapper for the Vuzix glasses is also in there. This makes use of the "SupermanProject\Release\iWearWrapper.dll" file. The source of this file is in the folder "SupermanProject\iWear".
+The NITE wrapper for Unity was developed by OpenNI (https://github.com/OpenNI/UnityWrapper).
+For more information: there is a pdf report in the "Bin" folder.
+
 
 Build Notes (for Win32/Win64):
 ------------------------------
@@ -29,4 +36,4 @@ Requirements:
     4) For the Vuzix glasses: Vuzix VR manager 3 (http://www.vuzix.com/site/_support/Vuzix_VR_Manager_3.zip)
     5) For stereo vision: iZ3D drivers (http://www.iz3d.com/)
     
-    Note: If you're having trouble getting everything to work. We found this blogpost to be very useful:http://www.cleoag.ru/2010/12/10/kinect-openni/
+    Note: If you're having trouble getting everything to work. We found this blogpost to be very useful: http://www.cleoag.ru/2010/12/10/kinect-openni/
