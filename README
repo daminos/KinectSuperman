@@ -9,7 +9,7 @@ for:     ISLA - University of Amsterdam
 
 Release Notes:
 --------------
-To run the game from the Binary, simply open "Bin\SupermanIVR.exe".
+To run the game from the Binary, simply open "SupermanProject\SupermanIVR.exe".
 To edit the project, run Unity3D (Free or Pro) and load the project, which is the "SupermanProject" folder. Afterwards click on the "Play" button to start the game.
 (If you see a blank screen, click on the "SupermanScene" script from the "Project" tab.)
 
