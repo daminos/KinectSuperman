@@ -1,38 +1,28 @@
-Kinect Superman v1.0
-========================================
-Made by: Daniël Karavolos
-         Sicco van Sas
-         Maarten van der Velden
-for:     ISLA - University of Amsterdam
-         January 2011
-========================================
+Unity Wrapper v1.0 Alpha
+------------------------
 
 Release Notes:
 --------------
-To run the game from the Binary, simply open "SupermanProject\SupermanIVR.exe".
-To edit the project, run Unity3D (Free or Pro) and load the project, which is the "SupermanProject" folder. Afterwards click on the "Play" button to start the game.
-(If you see a blank screen, click on the "SupermanScene" script from the "Project" tab.)
+To use this wrapper simply run Unity 3 Free/Pro edition and load the project from the "UnitySampleProject" directory.
+Afterwards click on the "Play" button to start the sample soldier project.
+(If you see a blank screen, click on the "WalkRunIdleBlend" script from the "Project" tab under the "Soldier Blend Advanced" section.
 
-* Remember to calibrate the glasses before starting, Set zero towards the Kinect
-* Set the resolution of the executable to 1024x768 or higher for best results.
-* Start the tracking procedure with OpenNI's calibration pose, usually this works better without wearing the VR glasses (they mirror)
-* If you want to run the game, but don't have VR glasses, please remove the iwear code from the Nite.cs file (search for 'VRWrapper'), and rebuild.
+Please note that the main DLL code for the interface is in "UnityInterface\UnityInterface.cpp " and the Unity NITE wrapper is in "UnitySampleProject\Assets\Nite.cs".
 
-Please note that the main code file is the script "SupermanProject\Assets\Superman\Nite.cs".
-The wrapper for the Vuzix glasses is also in there. This makes use of the "SupermanProject\Release\iWearWrapper.dll" file. The source of this file is in the folder "SupermanProject\iWear".
-The NITE wrapper for Unity was developed by OpenNI (https://github.com/OpenNI/UnityWrapper).
-For more information: there is a pdf report in the "Bin" folder.
+** Don't forget to start with the calibration pose! **
 
-
-Build Notes (for Win32/Win64):
-------------------------------
+Build Notes (for Win32):
+------------------------
 
 Requirements:
-    1) Unity3D engine 3.1 (http://unity3d.com/unity/download/)
-    2) SensorKinect driver (https://github.com/avin2/SensorKinect)
-    2) OpenNI (http://www.openni.org)
-    3) NITE (http://www.primesense.com/?p=515)
-    4) For the Vuzix glasses: Vuzix VR manager 3 (http://www.vuzix.com/site/_support/Vuzix_VR_Manager_3.zip)
-    5) For stereo vision: iZ3D drivers (http://www.iz3d.com/)
-    
-    Note: If you're having trouble getting everything to work. We found this blogpost to be very useful: http://www.cleoag.ru/2010/12/10/kinect-openni/
+	1) Unity Engine 3.1 (http://unity3d.com/unity/download/)
+	   Direct link: http://download.unity3d.com/download_unity/UnitySetup-3.1.0.exe	   
+	2) OpenNI (www.openni.org)
+	3) Sensor device module for OpenNI (www.openni.org)
+	4) NITE modules for OpenNI (www.openni.org)
+	
+	Note: Both the PRO and Free editions are fully supported!
+	   
+Building UnityInterface:
+	1) Open the "UnityInterface.sln" solution file in Visual Studio 2008 or 2010 and rebuild the project. 
+	   The DLL file will be created inside the "Bin" directory.

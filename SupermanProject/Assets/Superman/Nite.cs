@@ -38,7 +38,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Text; 
-
+	
 // The original Nite Unity Wrapper.
 public class NiteWrapper {
 	public enum SkeletonJoint {
@@ -244,6 +244,10 @@ public class Avatar {
 	Transform headTrans;	
 	float maxRotation = 32768;
 	public float smoothness = 100;
+	private bool triggered = false; //portal
+		//used for portals
+	public Vector3 warpToPosition = new Vector3(0,0,0);
+
 
     public Avatar() {
     }
@@ -252,6 +256,23 @@ public class Avatar {
     public Avatar(GameObject go) {
         Initialize(go);
     }
+	
+	// The next 4 functions are used by a portal
+	//Change characterPosition
+	public void SetCharacterPosition (Vector3 newPosition) {
+		characterPosition = newPosition;
+	}
+	
+	public bool GetTriggered() { return triggered;}
+	
+	public void SetTriggered(bool newVal) {
+		triggered = newVal;
+	}
+	
+	public void OnTriggerEnter() {
+		Debug.Log("Superman should be warped now");
+		triggered = true;
+	}
 
 	// Initialization of a new avatar.
     public void Initialize(GameObject go) {
@@ -446,7 +467,7 @@ public class Avatar {
 		
 		// Change the rotation of the head according to the gyroscope information.
 		headTrans.eulerAngles = new Vector3((pitch / maxRotation) * 180, -((yaw / maxRotation) * 180 + 180), (roll / maxRotation) * 180 + 270);
-		//headTrans.eulerAngles = Vector3.Slerp(headTrans.eulerAngles, new Vector3((pitch/maxRotation)*180, -((yaw/maxRotation)*180 + 180), (roll/maxRotation)*180 + 270), Time.deltaTime*smoothness);
+		headTrans.eulerAngles = Vector3.Slerp(headTrans.eulerAngles, new Vector3((pitch/maxRotation)*180, -((yaw/maxRotation)*180 + 180), (roll/maxRotation)*180 + 270), Time.deltaTime*smoothness);
     }
 	
 	// This function updates the position of the avatar when in flight.
@@ -466,7 +487,15 @@ public class Avatar {
 
 		// The actual update of the position based on the -joint.right position (i.e. the direction of the main fly arm)
 		// times the current speed.
-		spine.position -= (joint.right * currentSpeed);
+		if (Input.GetButton("Teleport") == true)
+			spine.position = new Vector3(1043.2F, 49.0F, 700.0F);
+
+		
+		if ( spine.position.y <= 1 ){
+						spine.position = characterPosition + new Vector3(0,5,0);
+		} else
+			spine.position -= (joint.right * currentSpeed);
+		
 		
 		// This new position is explicitly saved in the characterPosition variable, which
 		// is used as reference once the avatar is not in flight.
@@ -490,8 +519,8 @@ public class Avatar {
 	// to mimic the kinect calibration position.
     public void RotateToCalibrationPose() {
         RotateToInitialPosition();
-        rightElbow.rotation = Quaternion.Euler(0, -90, 90) * initialRotations[(int)NiteWrapper.SkeletonJoint.RIGHT_ELBOW];
-        leftElbow.rotation = Quaternion.Euler(0, 90, -90) * initialRotations[(int)NiteWrapper.SkeletonJoint.LEFT_ELBOW];
+        //rightElbow.rotation = Quaternion.Euler(0, -90, 90) * initialRotations[(int)NiteWrapper.SkeletonJoint.RIGHT_ELBOW];
+        //leftElbow.rotation = Quaternion.Euler(0, 90, -90) * initialRotations[(int)NiteWrapper.SkeletonJoint.LEFT_ELBOW];
     }
 
 	// Retrieves the latest rotation information from the kinect.
@@ -529,6 +558,11 @@ public class Avatar {
 		// has flown to) and the movement around the initial position of the user after flight (kinectOffsetPosition)
 		// relative to the kinect.
 		dest.position = characterPosition - kinectOffsetPosition + new Vector3(trans.pos.x/1000, trans.pos.y/1000 -1, -trans.pos.z/1000);
+		Debug.Log("Checking button pressed");
+		if(Input.GetButton("Teleport")) {
+			spine.position = new Vector3(0,0,0);
+			Debug.Log("Trigger key recognized");
+		}
 	}
 	
 	// Rotate the spine of the avatar to the direction of the main fly arm.
@@ -640,6 +674,9 @@ public class Nite : MonoBehaviour {
 			Debug.Log("Stopping to look for users");
             NiteWrapper.StopLookingForUsers();
         }
+		//set camera  on first person after calibration
+		characters[0].firstCamera.enabled = true;
+		characters[0].thirdCamera.enabled = false;
     }
 
     void OnUserLost(uint UserId) {
@@ -718,7 +755,7 @@ public class Nite : MonoBehaviour {
         foreach (KeyValuePair<uint, Avatar> pair in calibratedUsers)
             pair.Value.UpdateAvatar(pair.Key);
 	}
-
+	
 	// Quite the Nite and iWear wrappers.
 	void OnApplicationQuit() {
 		NiteWrapper.Shutdown();
